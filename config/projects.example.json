@@ -1,0 +1,39 @@
+{
+  "projects": [
+    {
+      "id": "site-a",
+      "name": "现场项目 A",
+      "mode": "clickhouse-http",
+      "configVersion": "site-a-v1",
+      "verified": false,
+      "reference": { "lng": 122.12, "lat": 30.12 },
+      "radars": [
+        { "id": "202601001", "name": "雷达 1", "baseline": { "lng": 122.12, "lat": 30.12, "bearingOffsetDeg": 0 } }
+      ],
+      "aisSources": [
+        { "id": "receiver-a", "name": "AIS 接收站 A" }
+      ],
+      "timeSemantics": "unverified",
+      "alignmentVerified": false,
+      "unitsVerified": false,
+      "clickhouse": {
+        "urlEnv": "CLICKHOUSE_URL",
+        "usernameEnv": "CLICKHOUSE_USER",
+        "passwordEnv": "CLICKHOUSE_PASSWORD",
+        "database": "default",
+        "table": "radar_data_combine_all",
+        "radarIdType": "String",
+        "columns": {
+          "time": "date", "radarId": "areaCode", "trackId": "trackId",
+          "range": "distance", "azimuth": "direction",
+          "storedLng": "lng", "storedLat": "lat"
+        },
+        "mapping": {
+          "version": "site-a-polar-v1", "rangeScaleToM": 1,
+          "azimuthScaleToDeg": 1, "azimuthSign": 1, "azimuthZeroDeg": 0
+        }
+      },
+      "ais": { "urlEnv": "AIS_API_URL", "authorizationEnv": "AIS_AUTHORIZATION", "parserVersion": "existing-backend-v1" }
+    }
+  ]
+}

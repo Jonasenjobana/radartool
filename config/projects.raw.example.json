@@ -1,0 +1,106 @@
+{
+  "projects": [
+    {
+      "id": "radar-202607",
+      "name": "南澳海域 · 真实历史（只读）",
+      "mode": "clickhouse-raw",
+      "configVersion": "nanao-reference-only-v5",
+      "verified": false,
+      "reference": {
+        "lng": 117.2,
+        "lat": 23.34
+      },
+      "radars": [
+        {
+          "id": "202607001",
+          "name": "南澳海域雷达1",
+          "deviceCode": "202607001",
+          "stationId": "203377062908928",
+          "positionText": "23°23′18.25″N 117°06′27.93″E",
+          "baseline": {
+            "lng": 117.107758,
+            "lat": 23.388403,
+            "bearingOffsetDeg": 93
+          }
+        },
+        {
+          "id": "202607002",
+          "name": "南澳海域雷达2",
+          "deviceCode": "202607002",
+          "stationId": "108586983691264",
+          "positionText": "23°17′09.83″N 117°18′33.97″E",
+          "baseline": {
+            "lng": 117.309437,
+            "lat": 23.286064,
+            "bearingOffsetDeg": 303.4
+          }
+        }
+      ],
+      "aisSources": [
+        {
+          "id": "202606002",
+          "name": "船载转发 AIS · 202606002"
+        }
+      ],
+      "defaultRange": {
+        "start": "2026-11-10T01:45:30.000Z",
+        "end": "2026-11-10T01:45:31.000Z"
+      },
+      "timeSemantics": "receive-time",
+      "unitsVerified": false,
+      "alignmentVerified": false,
+      "clickhouse": {
+        "urlEnv": "CLICKHOUSE_URL",
+        "usernameEnv": "CLICKHOUSE_USER",
+        "passwordEnv": "CLICKHOUSE_PASSWORD",
+        "database": "default",
+        "table": "radar_data_combine_all",
+        "radarIdType": "String",
+        "columns": {
+          "time": "date",
+          "radarId": "areaCode",
+          "trackId": "trackId",
+          "range": "distance",
+          "azimuth": "direction",
+          "storedLng": "lng",
+          "storedLat": "lat",
+          "deviceTime": "utc",
+          "targetTime": "time",
+          "sequence": "sequence"
+        },
+        "mapping": {
+          "version": "existing-range-degree-unconfirmed-v1",
+          "rangeScaleToM": 1,
+          "azimuthScaleToDeg": 1,
+          "azimuthSign": 1,
+          "azimuthZeroDeg": 0
+        },
+        "timeType": "DateTime"
+      },
+      "ais": {
+        "mode": "clickhouse-raw",
+        "database": "default",
+        "table": "stationtest_shipborne_repeater_datagram",
+        "columns": {
+          "time": "receiveTime",
+          "sourceId": "stationMmsi",
+          "message": "message",
+          "eventTime": "date",
+          "mmsi": "mmsi",
+          "messageType": "messageId",
+          "lng": "lng",
+          "lat": "lat",
+          "hash": "hash",
+          "status": "status"
+        },
+        "parserVersion": "dma-aislib-2.8.8-bridge-v4",
+        "timeType": "DateTime"
+      },
+      "warnings": [
+        "经纬度与朝向来自用户提供的参考配置，未作为可信安装真值；扫描距离、扫描范围不代表真实覆盖",
+        "雷达 date 与 AIS receiveTime 为查询时间；设备时间与两路延迟仍待现场核实，自动拟合暂不可用",
+        "源 DateTime 为秒精度；本工具不新增生产采集或入库"
+      ]
+    }
+  ]
+}
