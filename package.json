@@ -7,6 +7,7 @@
     "node": ">=22.18.0 <23"
   },
   "scripts": {
+    "prepare": "git config core.hooksPath .githooks",
     "dev": "node scripts/dev.js",
     "dev:server": "node --watch --env-file-if-exists=.env server/index.js",
     "dev:client": "vite --host 127.0.0.1",

@@ -2,6 +2,10 @@
 
 项目说明、启动方式与业务文档索引见 `README.md`。
 
+## Git 提交
+
+创建提交或版本标签前，先读 `CONTRIBUTING.md`。
+
 ## Agent skills
 
 ### Issue tracker
